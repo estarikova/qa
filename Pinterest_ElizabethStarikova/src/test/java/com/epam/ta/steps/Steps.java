@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 import com.epam.ta.pages.EditProfilePage;
+
 public class Steps
 {
 	private WebDriver driver;
@@ -62,6 +63,22 @@ public class Steps
 		editProfilePage.update();
 	}
 
+	public void changeLastName(String lastName)
+	{
+		EditProfilePage editProfilePage = new EditProfilePage(driver);
+		editProfilePage.setUserLastName(lastName);
+		editProfilePage.update();
+	}
+
+
+	public boolean isLastNameChanged(String expected)
+	{
+		MainPage mainPage = new MainPage(driver);
+		mainPage.showProfile();
+		String realFullName = mainPage.getLogedInUserName();
+		return realFullName.equals(expected);
+	}
+
 	public boolean isUrlChanged(String sample)
 	{
 		MainPage mainPage = new MainPage(driver);
@@ -82,7 +99,22 @@ public class Steps
 		return s;
 	}
 
+	public String goToDesignPage()
+	{
+		MainPage mainPage = new MainPage(driver);
+		mainPage.showCategoriesMenu();
+		mainPage.goToDesignPage();
+		String s = mainPage.getDesignPageHeader();
+		return s;
+	}
+
 	public boolean isInFFPage(String s,String expected)
+	{
+		MainPage mainPage = new MainPage(driver);
+		return s.equals(expected);
+	}
+
+	public boolean isInDesignPage(String s,String expected)
 	{
 		MainPage mainPage = new MainPage(driver);
 		return s.equals(expected);

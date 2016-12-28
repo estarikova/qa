@@ -19,6 +19,10 @@ public class EditProfilePage extends AbstractPage
     @FindBy(className = "confirmButton")
     private WebElement updateButton;
 
+	@FindBy(id = "userLastName")
+	private WebElement userLastNameSetInput;
+
+
 	public EditProfilePage(WebDriver driver)
 	{
 		super(driver);
@@ -31,6 +35,13 @@ public class EditProfilePage extends AbstractPage
         urlSetInput.sendKeys(Keys.DELETE);
         urlSetInput.sendKeys(sample);
     }
+
+    public void setUserLastName(String sample)
+	{
+		userLastNameSetInput.sendKeys(Keys.CONTROL + "a");
+		userLastNameSetInput.sendKeys(Keys.DELETE);
+		userLastNameSetInput.sendKeys(sample);
+	}
 
     public String getProfileUrl()
 	{

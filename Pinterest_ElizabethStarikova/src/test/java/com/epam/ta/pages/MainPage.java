@@ -30,6 +30,14 @@ public class MainPage extends AbstractPage
 	@FindBy(xpath = "//div[@class = 'header']/h1[@class='centeredWithinWrapper']")
 	private WebElement findUserPageHeader;
 
+	@FindBy(className = "categoriesHeader")
+	private WebElement categoriesButton;
+
+	@FindBy(xpath = "//div[@class='name'][contains(text(),'Дизайн')]")
+	private WebElement designLink;
+
+	@FindBy(xpath = "//h1[@class='feedName']")
+	private WebElement designPageHeader;
 
 	public MainPage(WebDriver driver)
 	{
@@ -67,9 +75,24 @@ public class MainPage extends AbstractPage
 		findFriendsLink.click();
 	}
 
+	public void showCategoriesMenu()
+	{
+		categoriesButton.click();
+	}
+
+	public void goToDesignPage()
+	{
+		designLink.click();
+	}
+
 	public String getFindUPHeader()
 	{
 		return findUserPageHeader.getText().toString();
+	}
+
+	public String getDesignPageHeader()
+	{
+		return designPageHeader.getText().toString();
 	}
 
 

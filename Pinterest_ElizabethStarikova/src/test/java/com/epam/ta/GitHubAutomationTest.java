@@ -18,6 +18,9 @@ public class GitHubAutomationTest {
 	private final String USERNAME = "Test4Test";
 	private final String URL = "TTTEEESSSTTT" + num;
 	private final String FINDUPHEADER = "Смотрите, какими идеями делятся ваши друзья";
+	private final String LASTNAME = "qwe" + num;
+	private final String EXPECTED_FULLNAME = "Test4Test "+LASTNAME;
+	private final String DESIGNPAGE_HEADER = "Дизайн";
 
 	@BeforeMethod(description = "Init browser")
 	public void setUp() {
@@ -42,6 +45,18 @@ public class GitHubAutomationTest {
 		steps.logoutPin();
 	}
 
+	@Test(description = "Change Last Name")
+	public void oneCanChangeLastName()
+	{
+		steps.loginPin(EMAIL,PASSWORD);
+		steps.goToSettingsPage();
+		steps.changeLastName(LASTNAME);
+		Assert.assertTrue(steps.isLastNameChanged(EXPECTED_FULLNAME));
+		steps.goToSettingsPage();
+		steps.changeLastName("");
+		steps.logoutPin();
+	}
+
 	@Test(description = "Change Profile URL")
 	public void oneCanChangeURL()
 	{
@@ -49,6 +64,15 @@ public class GitHubAutomationTest {
 		steps.goToSettingsPage();
 		steps.changeUrl(URL);
 		Assert.assertTrue(steps.isUrlChanged(URL));
+		steps.logoutPin();
+	}
+
+	@Test(description = "Go to the Design(category) page")
+	public void oneCanGoToDesignPage()
+	{
+		steps.loginPin(EMAIL,PASSWORD);
+		String s = steps.goToDesignPage();
+		Assert.assertTrue(steps.isInDesignPage(s,DESIGNPAGE_HEADER));
 		steps.logoutPin();
 	}
 
